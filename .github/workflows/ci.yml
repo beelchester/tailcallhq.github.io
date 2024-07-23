@@ -46,7 +46,7 @@ jobs:
             blog/**/*.{md,mdx}
 
       - name: Publish to Hashnode and Dev.to 📝
-        if: github.ref == 'refs/heads/develop' && steps.changed-markdown-files.outputs.any_changed == 'true'
+        if: github.ref == 'refs/heads/fix/auto_publish_error_case' && steps.changed-markdown-files.outputs.any_changed == 'true'
         env:
           HASHNODE_PAT: ${{ secrets.HASHNODE_PAT }}
           HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
