@@ -22,7 +22,7 @@ oeueoueou
 
 Imagine having a magical lens that lets you peek into the very structure of a GraphQL server. That's essentially what introspection does! It's like having a detailed map of a treasure trove, showing you every nook and cranny of the API's capabilities. This self-documenting capability is incredibly useful for developers, enabling tools like GraphiQL and GraphQL Playground to provide rich, interactive documentation and auto-completion features.
 
-A basic introspection query might look like this:
+As a basic introspection query might look like this:
 
 ```graphql
 {
