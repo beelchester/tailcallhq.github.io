@@ -54,4 +54,5 @@ jobs:
           DEVTO_ORG_NAME: ${{secrets.DEVTO_ORG_NAME}}
         run: |
           cd ./publish-externals
+          npm run generate
           npx --yes tsx ./src/index.ts "$CHANGED_FILES"
