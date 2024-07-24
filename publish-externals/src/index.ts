@@ -59,11 +59,11 @@ const writeBacklog = async (backlog: any) => {
   fs.writeFile(
     path.join(__dirname, "../../", "failed-publish-external.json"),
     JSON.stringify(backlog, null, 2),
-    err => {
+    (err) => {
       if (err) {
         console.error(err)
       }
-    }
+    },
   )
 }
 
