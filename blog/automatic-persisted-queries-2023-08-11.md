@@ -21,7 +21,7 @@ Persisted queries are often hailed as a solution to several challenges in GraphQ
 <link rel="canonical" href="https://tailcall.hashnode.dev/the-truth-about-scaling-automatic-persisted-queries"/>
 <title>The truth about scaling Automatic Persisted Queries</title>
 </head>
-### The Problem
+### The Problems
 
 #### Large Queries
 
