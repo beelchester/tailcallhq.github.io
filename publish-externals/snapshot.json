@@ -1,3 +1,13 @@
 {
-  "blogs": {}
+  "blogs": {
+    "the-truth-about-scaling-automatic-persisted-queries": {
+      "file": "blog/automatic-persisted-queries-2023-0asdf8-asdf1.md",
+      "platforms": {
+        "Dev.to": {
+          "published": false,
+          "lastUpdatePublished": false
+        }
+      }
+    }
+  }
 }
