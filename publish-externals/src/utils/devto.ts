@@ -1,7 +1,7 @@
 import axios from "axios"
 import {DEVTO_API_KEY, DEVTO_ORG_ID, DEVTO_ORG_NAME} from "./constants"
 import {addBaseUrlToImages} from "./markdown"
-import { publishDraft } from "./hashnode"
+import {publishDraft} from "./hashnode"
 
 const isOrg = DEVTO_ORG_ID && DEVTO_ORG_NAME
 const devtoPostHandler = async (frontMatter: any, content: any) => {

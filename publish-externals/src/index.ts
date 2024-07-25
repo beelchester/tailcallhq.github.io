@@ -76,7 +76,8 @@ const publish = async (file: string, blogs: {[key: string]: Blog}, publication: 
 
     blogs[slug] = blogs[slug] || {
       file,
-      platforms: {}}
+      platforms: {},
+    }
     blogs[slug].platforms[platform] = {
       published: true,
       lastUpdatePublished: true,
@@ -90,7 +91,8 @@ const publish = async (file: string, blogs: {[key: string]: Blog}, publication: 
 
     blogs[slug] = blogs[slug] || {
       file,
-      platforms: {}}
+      platforms: {},
+    }
     blogs[slug].platforms[platform] = {
       published: blogs[slug].platforms[platform]?.published || false,
       lastUpdatePublished: false,
