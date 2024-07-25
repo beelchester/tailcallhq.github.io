@@ -58,7 +58,6 @@ jobs:
           npx --yes tsx ./src/index.ts "$ADDED_FILES"
 
       - name: Commit and push changes (on develop)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/test/auto_publish_error_case'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: test/auto_publish_error_case
