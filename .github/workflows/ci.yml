@@ -63,5 +63,5 @@ jobs:
         with:
           branch: test/auto_publish_error_case
           commit_author: Author <actions@github.com>
-          commit_message: "update auto publish blogs snapshot"
+          commit_message: "Update snapshot"
 
