@@ -1,6 +1,7 @@
 import axios from "axios"
 import {DEVTO_API_KEY, DEVTO_ORG_ID, DEVTO_ORG_NAME} from "./constants"
 import {addBaseUrlToImages} from "./markdown"
+import { publishDraft } from "./hashnode"
 
 const isOrg = DEVTO_ORG_ID && DEVTO_ORG_NAME
 const devtoPostHandler = async (frontMatter: any, content: any) => {
@@ -24,6 +25,7 @@ const devtoPostHandler = async (frontMatter: any, content: any) => {
     await publishPostOnDevto({
       title,
       body_markdown: processedMd,
+      publishDraft: true,
       main_image: cover_image,
       canonical_url: canonical_url || null,
       description: description,
@@ -34,7 +36,7 @@ const devtoPostHandler = async (frontMatter: any, content: any) => {
 }
 const devtoApiVars = {
   headers: {
-    "api-key": DEVTO_API_KEY,
+    "api-key": "94nBp6M4GnsK5ArjVaLEhm3",
   },
 }
 
