@@ -61,7 +61,7 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          branch: test/optimise_ci
+          branch: test/auto_publish_error_case
           commit_author: Author <actions@github.com>
           commit_message: "update auto publish blogs snapshot"
 
