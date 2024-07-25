@@ -27,7 +27,6 @@ interface FrontMatter {
 }
 
 const ExternalPublications: ExternalPublication[] = [{name: "Dev.to", handler: devTo.handler}]
-const errors = []
 
 const main = async () => {
   const addedFilesArg = process.argv[2]
@@ -57,9 +56,6 @@ const main = async () => {
     }
   } finally {
     await writeSnapshot(blogs)
-    if (errors.length > 0) {
-      throw new Error("Publishing failed because of one or more errors")
-    }
   }
 }
 
@@ -98,7 +94,6 @@ const publish = async (file: string, blogs: {[key: string]: Blog}, publication: 
       lastUpdatePublished: false,
     }
     console.log(blogs[slug])
-    errors.push(error)
   }
 }
 
