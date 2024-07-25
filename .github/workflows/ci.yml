@@ -48,7 +48,7 @@ jobs:
         env:
           HASHNODE_PAT: ${{ secrets.HASHNODE_PAT }}
           HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
-          ADDED_FILES: ${{ steps.changed-files.outputs.added_files }}
+          ADDED_FILES: ${{ steps.changed-markdown-files.outputs.added_files }}
           DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY}}
           DEVTO_ORG_ID: ${{secrets.DEVTO_ORG_ID}}
           DEVTO_ORG_NAME: ${{secrets.DEVTO_ORG_NAME}}
