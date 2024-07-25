@@ -36,15 +36,14 @@ const publish = async (file: string) => {
     console.log(`[${publication.name}] ${frontMatter.slug} ... publishing ⏳`)
     try {
       await publication.handler(frontMatter, content)
-      const inSnapshot = blogs.findIndex((blog) => blog.blogName === file)
       // Update fields and if blog does not exist in snapshot, add it
+      const inSnapshot = blogs.findIndex((blog) => blog.blogName === file)
       if (inSnapshot !== -1) {
         blogs[inSnapshot].published = true
-        blogs[inSnapshot].lastUpdatePublished = true 
+        blogs[inSnapshot].lastUpdatePublished = true
         blogs[inSnapshot].lastUpdatePublishedAt = new Date().toUTCString()
         await writeSnapshot(blogs)
-      }
-      else {
+      } else {
         blogs.push({
           blogName: file,
           published: true,
@@ -62,8 +61,6 @@ const publish = async (file: string) => {
   if (errors.length !== 0) {
     // Update fields and if blog does not exist in snapshot, add it
     const inSnapshot = blogs.findIndex((blog) => blog.blogName === file)
-    console.log(inSnapshot)
-    console.log(blogs)
     if (inSnapshot !== -1) {
       blogs[inSnapshot].lastUpdatePublished = false
       await writeSnapshot(blogs)
@@ -83,15 +80,11 @@ const publish = async (file: string) => {
 
 const writeSnapshot = async (snapshot: any) => {
   try {
-    fs.writeFileSync(
-      path.join(__dirname, "../", "snapshot.json"),
-      JSON.stringify({ snapshot }, null, 2),
-      (err) => {
-        if (err) {
-          console.error(err)
-        }
-      },
-    )
+    fs.writeFileSync(path.join(__dirname, "../", "snapshot.json"), JSON.stringify({snapshot}, null, 2), (err) => {
+      if (err) {
+        console.error(err)
+      }
+    })
   } catch (err) {
     console.error(err)
   }
