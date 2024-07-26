@@ -29,16 +29,22 @@ interface FrontMatter {
 const ExternalPublications: ExternalPublication[] = [{name: "Dev.to", handler: devTo.handler}]
 
 const main = async () => {
-  const addedFilesArg = process.argv[2]
+  const args = process.argv.slice(2)
+  const hasPublishFlag = args.includes("--publish")
+  const addedFilesArg = args.filter((arg) => arg !== "--publish")[0]
   const addedFiles = addedFilesArg ? addedFilesArg.split(" ") : []
-  console.log("addedFiles", addedFiles)
   const blogs: {[key: string]: Blog} = snapshot.blogs || {}
+  let toPublish = 0
 
   try {
     for (let publication of ExternalPublications) {
       for (const file of addedFiles) {
+        const {frontMatter} = extractFrontMatterAndContent(path.join(__dirname, "../../", file))
+        const slug = frontMatter.slug
         if (file.startsWith("blog/")) {
-          await publish(file, blogs, publication)
+          console.log("Publishing new blog", slug)
+          toPublish++
+          hasPublishFlag && (await publish(file, blogs, publication))
         }
       }
 
@@ -48,14 +54,24 @@ const main = async () => {
           const {content} = extractFrontMatterAndContent(path.join(__dirname, "../../", file))
           const contentHash = createHash("sha256").update(content).digest("hex")
 
-          if (!blogs[slug].hash || blogs[slug].hash !== contentHash) {
-            await publish(file, blogs, publication)
+          if (!blogs[slug].hash) {
+            console.log("Publishing new blog from snapshot", slug)
+            toPublish++
+            hasPublishFlag && (await publish(file, blogs, publication))
+          } else if (blogs[slug].hash !== contentHash) {
+            console.log("Publishing updated blog", slug)
+            toPublish++
+            hasPublishFlag && (await publish(file, blogs, publication))
           }
         }
       }
     }
   } finally {
-    await writeSnapshot(blogs)
+    if (toPublish === 0) {
+      console.log("No changes detected. Exiting.")
+    } else {
+      hasPublishFlag && (await writeSnapshot(blogs))
+    }
   }
 }
 
@@ -98,8 +114,15 @@ const publish = async (file: string, blogs: {[key: string]: Blog}, publication: 
 }
 
 const writeSnapshot = async (blogs: {[key: string]: Blog}) => {
+  console.log("Writing Snapshot")
+  const snapshot = JSON.stringify({blogs}, null, 2)
+  console.log(snapshot)
   try {
-    fs.writeFileSync(path.join(__dirname, "../", "snapshot.json"), JSON.stringify({blogs}, null, 2))
+    fs.writeFile(path.join(__dirname, "../", "snapshot.json"), snapshot, (err) => {
+      if (err) {
+        console.error(err)
+      }
+    })
   } catch (err) {
     console.error(err)
   }

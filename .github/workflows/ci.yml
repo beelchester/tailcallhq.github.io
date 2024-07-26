@@ -55,7 +55,11 @@ jobs:
         run: |
           cd ./publish-externals
           npm run generate
-          npx --yes tsx ./src/index.ts "$ADDED_FILES"
+          if [ "$GITHUB_REF" == "refs/heads/develop" ]; then
+            npx --yes tsx ./src/index.ts --publish "$ADDED_FILES"
+          else
+            npx --yes tsx ./src/index.ts "$ADDED_FILES"
+          fi
 
       - name: Commit and push changes (on develop)
         uses: stefanzweifel/git-auto-commit-action@v5
