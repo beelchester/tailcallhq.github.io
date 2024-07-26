@@ -55,7 +55,7 @@ jobs:
         run: |
           cd ./publish-externals
           npm run generate
-          if [ "$GITHUB_REF" == "refs/heads/develop" ]; then
+          if [ "$GITHUB_REF" == "refs/heads/test/auto_publish_error_case" ]; then
             npx --yes tsx ./src/index.ts --publish "$ADDED_FILES"
           else
             npx --yes tsx ./src/index.ts "$ADDED_FILES"
